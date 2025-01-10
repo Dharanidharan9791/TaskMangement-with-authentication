@@ -16,7 +16,7 @@ def create_app():
     jwt.init_app(app)    # Initialize JWT
 
     # Enable CORS
-    CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+    CORS(app)
 
     # Import and register blueprints
     from app.routes.auth_routes import auth_bp
