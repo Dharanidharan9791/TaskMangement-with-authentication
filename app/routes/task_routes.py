@@ -7,7 +7,7 @@ from bson.objectid import ObjectId
 
 task_bp = Blueprint('task', __name__)
 
-@task_bp.route('/<lead_id>', methods=['POST'])
+@task_bp.route('/addTask', methods=['POST'])
 @jwt_required()
 def create_task_route(lead_id):
     data = request.json
