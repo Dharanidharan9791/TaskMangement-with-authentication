@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_pymongo import PyMongo
+from flask_cors import CORS
 from app.config import Config
 
 mongo = PyMongo()
@@ -10,8 +11,12 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-   # mongo.init_app(app)  # Initialize MongoDB
+    # Initialize extensions
+    mongo.init_app(app)  # Initialize MongoDB
     jwt.init_app(app)    # Initialize JWT
+
+    # Enable CORS
+    CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
 
     # Import and register blueprints
     from app.routes.auth_routes import auth_bp
@@ -21,6 +26,10 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(lead_bp, url_prefix='/lead')
     app.register_blueprint(task_bp, url_prefix='/task')
+
+    @app.route('/')
+    def home():
+        return {"message": "CORS is enabled!"}
 
     return app
 
