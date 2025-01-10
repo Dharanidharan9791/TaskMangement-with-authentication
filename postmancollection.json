@@ -1,0 +1,155 @@
+{
+    "info": {
+        "name": "Flask Task API",
+        "description": "Postman collection for testing Flask Task API routes",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Auth - Register",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "http://127.0.0.1:5000/register",
+                    "host": ["127.0.0.1"],
+                    "port": "5000",
+                    "path": ["register"]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"username\": \"example\", \"password\": \"password\"}"
+                }
+            }
+        },
+        {
+            "name": "Auth - Login",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "http://127.0.0.1:5000/login",
+                    "host": ["127.0.0.1"],
+                    "port": "5000",
+                    "path": ["login"]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"username\": \"example\", \"password\": \"password\"}"
+                }
+            }
+        },
+        {
+            "name": "Lead - Create Lead",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "http://127.0.0.1:5000/",
+                    "host": ["127.0.0.1"],
+                    "port": "5000",
+                    "path": [""]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"name\": \"Lead Name\", \"details\": \"Lead Details\"}"
+                }
+            }
+        },
+        {
+            "name": "Task - Create Task",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "http://127.0.0.1:5000/{{lead_id}}",
+                    "host": ["127.0.0.1"],
+                    "port": "5000",
+                    "path": ["{{lead_id}}"]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"title\": \"Task Title\", \"description\": \"Task Description\"}"
+                }
+            }
+        },
+        {
+            "name": "Task - Get Tasks",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://127.0.0.1:5000/{{lead_id}}",
+                    "host": ["127.0.0.1"],
+                    "port": "5000",
+                    "path": ["{{lead_id}}"]
+                }
+            }
+        },
+        {
+            "name": "Task - Get Task by ID",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://127.0.0.1:5000/{{lead_id}}/{{task_id}}",
+                    "host": ["127.0.0.1"],
+                    "port": "5000",
+                    "path": ["{{lead_id}}", "{{task_id}}"]
+                }
+            }
+        },
+        {
+            "name": "Task - Update Task",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "http://127.0.0.1:5000/{{lead_id}}/{{task_id}}",
+                    "host": ["127.0.0.1"],
+                    "port": "5000",
+                    "path": ["{{lead_id}}", "{{task_id}}"]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"title\": \"Updated Task Title\", \"description\": \"Updated Task Description\"}"
+                }
+            }
+        },
+        {
+            "name": "Task - Delete Task",
+            "request": {
+                "method": "DELETE",
+                "url": {
+                    "raw": "http://127.0.0.1:5000/{{lead_id}}/{{task_id}}",
+                    "host": ["127.0.0.1"],
+                    "port": "5000",
+                    "path": ["{{lead_id}}", "{{task_id}}"]
+                }
+            }
+        }
+    ]
+}

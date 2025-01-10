@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app import mongo
+from app.database import db
 from flask_jwt_extended import create_access_token
 
 auth_bp = Blueprint('auth', __name__)
@@ -7,7 +7,7 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
-    users_collection = mongo.db.users  # Access the "users" collection
+    users_collection = db.users  # Access the "users" collection
     existing_user = users_collection.find_one({"email": data["email"]})
 
     if existing_user:
@@ -25,7 +25,7 @@ def register():
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    users_collection = mongo.db.users
+    users_collection = db.users
     user = users_collection.find_one({"email": data["email"]})
 
     if not user or user["password"] != data["password"]:  # Use hashed passwords in production

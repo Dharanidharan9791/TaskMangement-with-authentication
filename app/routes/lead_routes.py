@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
-from app import mongo  # Import mongo
+from app.database import db
 from app.models.lead_model import create_lead
 
 lead_bp = Blueprint('lead', __name__)
@@ -13,8 +13,8 @@ def create_lead_route():
     if not company_id:
         return jsonify({"error": "Company ID is required"}), 400
 
-    # Pass mongo.db to the create_lead function
-    create_lead(mongo.db, {
+    # Pass db to the create_lead function
+    create_lead(db, {
         "company": data['company'],
         "contact": data['contact'],
         "company_id": company_id

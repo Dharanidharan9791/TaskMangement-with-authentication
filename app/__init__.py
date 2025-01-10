@@ -10,7 +10,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    mongo.init_app(app)  # Initialize MongoDB
+   # mongo.init_app(app)  # Initialize MongoDB
     jwt.init_app(app)    # Initialize JWT
 
     # Import and register blueprints
