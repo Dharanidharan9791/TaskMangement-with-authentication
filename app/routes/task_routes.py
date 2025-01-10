@@ -23,17 +23,26 @@ def create_task_route(lead_id):
 @task_bp.route('/<lead_id>', methods=['GET'])
 @jwt_required()
 def get_tasks(lead_id):
-    print("Received lead_id:", lead_id)  # Debugging input
-    print("Type of lead_id:", type(lead_id))
     try:
-        # Ensure lead_id is a string
-        lead_id = str(lead_id)
+        # Strip extra quotes if present
+        lead_id = lead_id.strip('"').strip("'")
+
+        print("Received lead_id:", lead_id)  # Debugging input
+
         # Query the database
         tasks = list(db.tasks.find({"lead_id": lead_id}))
-        return tasks, 200
+        print("Fetched tasks:", tasks)  # Debugging output
+
+        # Convert MongoDB `_id` to a string for JSON serialization
+        for task in tasks:
+            task['_id'] = str(task['_id'])
+
+        return jsonify(tasks), 200
     except Exception as e:
         print("Error during query:", str(e))
         return jsonify({"error": "Failed to fetch tasks", "details": str(e)}), 500
+
+
 
 
 @task_bp.route('/<lead_id>/<task_id>', methods=['GET'])
