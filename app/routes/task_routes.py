@@ -9,7 +9,7 @@ task_bp = Blueprint('task', __name__)
 
 @task_bp.route('/addTask', methods=['POST'])
 @jwt_required()
-def create_task_route(lead_id):
+def create_task_route():
     data = request.json
     company_id = request.args.get('company_id')
     if not company_id:
