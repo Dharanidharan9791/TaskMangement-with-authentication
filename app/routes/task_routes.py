@@ -3,7 +3,6 @@ from flask_jwt_extended import jwt_required
 from app.models.task_model import create_task, get_all_tasks, get_task, update_task, delete_task
 from app.database import db
 from bson.objectid import ObjectId
-import logging
 
 task_bp = Blueprint('task', __name__)
 
@@ -51,7 +50,6 @@ def update_task_route(lead_id, task_id):
     lead_id = lead_id.strip('"').strip("'")
     task_id = task_id.strip('"').strip("'")
     data = request.json
-    logging.info(f"Received update request for lead_id: {lead_id}, task_id: {task_id}, data: {data}")
     update_task(db, lead_id, task_id, data)
     return jsonify({"message": "Task updated successfully"}), 200
 
