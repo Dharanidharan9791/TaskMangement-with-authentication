@@ -3,6 +3,7 @@ from flask_jwt_extended import JWTManager
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 from app.config import Config
+import logging
 
 mongo = PyMongo()
 jwt = JWTManager()
@@ -10,6 +11,7 @@ jwt = JWTManager()
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+    logging.basicConfig(level=logging.INFO)
 
     # Initialize extensions
     mongo.init_app(app)  # Initialize MongoDB
